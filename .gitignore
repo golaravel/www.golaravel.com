@@ -1,1 +1,4 @@
 _site/
+.tmp/
+node_modules/
+

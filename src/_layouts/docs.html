@@ -1,0 +1,23 @@
+
+  {{> docs-header }}
+
+    <section class="docs-heading">
+        <div class="container">
+            <h2>Laravel4 中文文档<small>（{{sync-date}}更新）</small></h2>
+        </div>
+    </section>
+
+    <section class="docs-content">
+      <div class="container">
+          <nav class="docs-menu">
+            {{> documentation }}
+        </nav>
+        <article class="docs-body">
+          {{& content }}
+        </article>
+        <div class="clearfix"></div>
+      </div>
+    </section>
+
+
+    {{> footer-secondary }}

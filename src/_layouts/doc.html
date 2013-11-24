@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    {{> header }}
+    <!-- Place anything custom after this. -->
+  </head>
+  <body>
+
+    <!-- Docs master nav -->
+    {{> nav-main }}
+
+    <section class="docs-heading">
+        <div class="container">
+            <h2>Laravel4 中文文档</h2>
+        </div>
+    </section>
+
+    <section class="docs-content">
+      <div class="container">
+          <nav class="docs-menu">
+            {{> documentation }}
+        </nav>
+        <article class="docs-body">
+          {{& content }}
+        </article>
+        <div class="clearfix"></div>
+      </div>
+    </section>
+
+    <!-- Main docs footer (social buttons, copyright, etc). -->
+    {{> colophon }}
+
+    <!-- JS and analytics only. -->
+    {{> footer }}
+
+  </body>
+</html>

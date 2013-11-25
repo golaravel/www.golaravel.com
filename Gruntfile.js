@@ -21,6 +21,7 @@ module.exports = function(grunt) {
     tmp: '.tmp',
     src: 'src',
     build: '_site',
+    chm: '_chm',
     docs: '<%= dir.src %>/docs',
     assets: '<%= dir.src %>/assets'
   };
@@ -51,6 +52,11 @@ module.exports = function(grunt) {
       api:{
         files: [
           {expand: true, cwd: '<%= dir.src %>/api/', src: ['**/**'], dest: '<%= dir.build %>/api/'}
+        ]
+      },
+      chm: {
+        files: [
+          {expand: true, cwd: '<%= dir.build %>', src: ['**/**', '!**/*.html'], dest: '<%= dir.chm %>'}
         ]
       }
     },
@@ -91,6 +97,23 @@ module.exports = function(grunt) {
             cwd: '<%= dir.tmp %>/docs/',
             src: ['*.html'],
             dest: '<%= dir.tmp %>/docs/'
+          }
+        ]
+      },
+
+      chm: {
+        options: {
+          replacements: [{
+            pattern: /(<meta\s+charset=")(utf-8)(">)/g,
+            replacement: '$1gb2312$3'
+          }]
+        },
+        files: [
+          {
+            expand: true,
+            cwd: '<%= dir.build %>',
+            src: ['**/*.html'],
+            dest: '<%= dir.chm %>'
           }
         ]
       }
@@ -159,8 +182,24 @@ module.exports = function(grunt) {
             base: '<%= dir.build %>'
           }
         }
-      }
+      },
 
+    'grunt-iconv-lite': {
+      options: {
+        fromEncoding: 'utf8',
+        toEncoding: 'gb2312',
+      },
+      site: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= dir.chm %>',
+            src: ['**/*.html'],
+            dest: '<%= dir.chm %>'
+          }
+        ]
+      }
+    },
   });
 
 
@@ -172,11 +211,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('chains-markdown');
   grunt.loadNpmTasks('chains-pages');
+  grunt.loadNpmTasks('grunt-iconv-lite');
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'docs',  'home', 'copy']);
+  grunt.registerTask('default', ['clean', 'docs',  'home', 'copy:assets', 'copy:indexfile', 'copy:api']);
   grunt.registerTask('docs', ['markdown:docs','string-replace:docs', 'pages:docs']);
   grunt.registerTask('home', ['pages:home']);
+
+  grunt.registerTask('chm', ['string-replace:chm', 'grunt-iconv-lite', 'copy:chm'])
 
 
 };

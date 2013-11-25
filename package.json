@@ -14,7 +14,10 @@
     "grunt-contrib-clean": "~0.5.0",
     "chains-pages": "~0.1.6",
     "chains-markdown": "~0.1.4",
-    "moment": "~2.4.0"
+    "moment": "~2.4.0",
+    "grunt-iconv-lite": "~0.1.0",
+    "iconv-lite": "~0.2.11",
+    "underscore": "~1.5.2"
   },
   "licenses": [
     {
